@@ -25,7 +25,7 @@ Demo login: **111210552 / 123456**. Do not use a real university password.
 Four initial courses use the student-provided codes, names, credits, and periods (11 credits). Teacher and room details were not verified and are omitted or marked pending. Additional DEMO courses are explicitly illustrative. The credit limit is a demonstration rule, not an assertion about university policy. No invented grades or GPA.
 
 ## GitHub Pages
-Upload the entire `HW2` folder into the existing `_se` repository. Keep `css` and `js` as subfolders. With Pages already configured, the URL will be:
+The URL :
 `https://julianalidya.github.io/_se/HW2/`
 
 ## Project structure
