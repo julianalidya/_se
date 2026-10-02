@@ -2,7 +2,7 @@
 
 現代軟體工程 / Modern Software Engineering
 
-學生：111210552 林小蓮，資工四
+林小蓮 111210552 資工四
 
 A responsive student portal built with HTML, CSS, and vanilla JavaScript.
 This is a classroom demonstration, not the official NQU academic system.
