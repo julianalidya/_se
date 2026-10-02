@@ -1,14 +1,17 @@
-# HW4：分支、合併、Fork、Pull Request 實作紀錄
+# HW4：Git Flow、GitHub Flow 實作紀錄
 
 **學號：** 111210552  
 **姓名：** 林小蓮  
 **班級：** 資工四  
 
-本次作業使用 GitHub 實際操作 GitHub Flow，包含 Fork、建立分支、Commit、Pull Request 與 Merge。
+本次作業透過 GitHub 實際操作 Branch、Merge、Fork 與 Pull Request，
+並使用兩組 Repository 練習不同的 GitHub 協作流程。
 
 ---
 
 ## 🔗 專案連結
+
+### 練習一：Fork Repository 與 Branch
 
 - **母專案（Original Repository）：**  
   https://github.com/se-test-examples/git-examples
@@ -22,243 +25,278 @@
 - **Pull Request #1：**  
   https://github.com/julianalidya/git-examples/pull/1
 
+### 練習二：Mother Repository 與 Fork Pull Request
+
+- **母專案：**  
+  https://github.com/juli-se-example/git-example
+
+- **子專案（Fork）：**  
+  https://github.com/julianalidya/git-example
+
+- **分支（developJuliBranch）：**  
+  https://github.com/juli-se-example/git-example/tree/developJuliBranch
+
+- **Fork Pull Request #2：**  
+  https://github.com/juli-se-example/git-example/pull/2
+
 ---
 
-## 1. Fork（建立子專案）
+# 練習一：GitHub Flow 基本操作
 
-首先將老師提供的母專案：
+## 1. Fork
+
+首先將母專案：
 
 `se-test-examples/git-examples`
 
-使用 GitHub 的 **Fork** 功能複製到自己的 GitHub 帳號。
+Fork 至自己的 GitHub 帳號。
 
-Fork 完成後，我的子專案為：
+Fork 完成後的 Repository：
 
 `julianalidya/git-examples`
 
-### GitHub 上的操作
-
-1. 進入母專案 `se-test-examples/git-examples`
-2. 點選右上角的 **Fork**
-3. Owner 選擇 `julianalidya`
-4. Repository name 保留 `git-examples`
-5. 點選 **Create fork**
-
-完成後：
+流程：
 
 ```text
-母專案：
 se-test-examples/git-examples
-
-        ↓ Fork
-
-子專案：
+            ↓ Fork
 julianalidya/git-examples
 ```
 
 ---
 
-## 2. 分支（Branch）
+## 2. 建立 Branch
 
-在自己的 Fork Repository 中，從 `main` 建立新的開發分支：
+在 Fork Repository 的 `main` 建立新的分支：
 
 `developJuliBranch`
 
-### GitHub 上的操作
+並在此分支進行修改。
 
-1. 進入 `julianalidya/git-examples`
-2. 開啟 **Branches**
-3. 點選 **New branch**
-4. New branch name 輸入 `developJuliBranch`
-5. Source repository 選擇 `julianalidya/git-examples`
-6. Source branch 選擇 `main`
-7. 點選 **Create new branch**
-
-相當於使用 Git 指令：
+概念上相當於：
 
 ```bash
 git checkout main
 git checkout -b developJuliBranch
 ```
 
-建立後共有兩個分支：
-
-```text
-main
-└── developJuliBranch
-```
-
 ---
 
-## 3. 新增檔案與 Commit
+## 3. Commit
 
-切換至 `developJuliBranch` 後，我在此分支新增：
+在 `developJuliBranch` 中新增：
 
 `juliBranch.md`
 
-檔案內容：
-
-```markdown
-# Git Branch Practice
-
-Name: 林小蓮
-Student ID: 111210552
-Department: 資工四
-
-This file was created in the `developJuliBranch` branch to practice the GitHub Flow workflow.
-```
-
-Commit message：
+並提交修改：
 
 ```text
 Create juliBranch.md
 ```
 
-若使用 Git 指令，流程相當於：
+概念上相當於：
 
 ```bash
-git checkout developJuliBranch
 git add juliBranch.md
 git commit -m "Create juliBranch.md"
 git push origin developJuliBranch
 ```
 
-此時修改只存在於 `developJuliBranch`，尚未合併到 `main`。
-
 ---
 
 ## 4. Pull Request
 
-完成分支修改後，建立 Pull Request，將 `developJuliBranch` 的內容準備合併到 `main`。
-
-### Pull Request 設定
+完成 Branch 修改後，建立 Pull Request：
 
 ```text
-base: main
-←
-compare: developJuliBranch
+developJuliBranch
+        ↓
+       main
+```
+
+透過 Pull Request 確認 Branch 中的修改內容。
+
+---
+
+## 5. Merge
+
+確認修改內容後執行：
+
+**Merge pull request**
+
+將 `developJuliBranch` 的修改合併至 `main`。
+
+流程如下：
+
+```text
+main
+ ↓
+developJuliBranch
+ ↓
+juliBranch.md
+ ↓
+Commit
+ ↓
+Pull Request
+ ↓
+Merge
+ ↓
+main
+```
+
+---
+
+# 練習二：Fork 與跨 Repository Pull Request
+
+為了進一步練習 Fork 與 Pull Request，本次另外建立母專案：
+
+`juli-se-example/git-example`
+
+並完成 Branch、Merge、Fork 以及從 Fork 回到母專案的 Pull Request。
+
+---
+
+## 6. Mother Repository Branch
+
+在母專案：
+
+`juli-se-example/git-example`
+
+從 `main` 建立：
+
+`developJuliBranch`
+
+並在此 Branch 建立：
+
+`juliBranch.md`
+
+完成 Commit 後建立 Pull Request：
+
+```text
+developJuliBranch → main
+```
+
+確認內容後 Merge 至 `main`。
+
+---
+
+## 7. Fork Repository
+
+接著將母專案 Fork 至個人帳號：
+
+```text
+juli-se-example/git-example
+          ↓ Fork
+julianalidya/git-example
+```
+
+Fork 完成後，在個人的 Repository 中建立：
+
+`juliFork.md`
+
+並 Commit 修改。
+
+---
+
+## 8. Fork Pull Request
+
+完成 Fork 中的修改後，建立跨 Repository 的 Pull Request：
+
+```text
+julianalidya/git-example:main
+              ↓
+juli-se-example/git-example:main
 ```
 
 Pull Request title：
 
 ```text
-Create juliBranch.md
+Create juliFork.md
 ```
 
-Description：
+確認沒有 conflict 後，執行 **Merge pull request**。
+
+最後 `juliFork.md` 成功從個人的 Fork Repository 合併回母專案。
+
+完整流程：
 
 ```text
-Practice pull request and merge using GitHub Flow.
-```
-
-Pull Request：
-
-https://github.com/julianalidya/git-examples/pull/1
-
-若使用 GitHub CLI，也可以使用：
-
-```bash
-gh pr create \
-  --base main \
-  --head developJuliBranch \
-  --title "Create juliBranch.md"
+Mother Repository
+juli-se-example/git-example
+          │
+          ├── main
+          │    ↓
+          │ developJuliBranch
+          │    ↓
+          │ juliBranch.md
+          │    ↓
+          │ Pull Request
+          │    ↓
+          │  Merge
+          │
+          ↓
+        Fork
+          ↓
+julianalidya/git-example
+          ↓
+     juliFork.md
+          ↓
+        Commit
+          ↓
+    Pull Request
+          ↓
+Mother Repository
+          ↓
+        Merge
 ```
 
 ---
 
-## 5. 合併（Merge）
+# GitHub Flow 說明
 
-確認 Pull Request 沒有 conflict 後，將 `developJuliBranch` 合併至 `main`。
+本次主要使用 **GitHub Flow** 的方式進行操作。
 
-### GitHub 上的操作
+GitHub Flow 以 `main` 為主要分支。進行修改時，可以建立新的 Branch，在 Branch 中完成修改與 Commit，再透過 Pull Request 檢查修改內容，最後 Merge 回 `main`。
 
-1. 開啟 Pull Request #1
-2. 確認 Files changed
-3. 點選 **Merge pull request**
-4. 點選 **Confirm merge**
-5. Pull Request 顯示 **Merged**
+Fork 則可以建立獨立的 Repository 副本。Fork Repository 完成修改後，也可以透過 Pull Request 將修改提交回原本的 Repository。
 
-最後的流程：
+因此本次實際練習了兩種 Pull Request：
 
 ```text
-main
-  │
-  ├── create developJuliBranch
-  │
-  └── developJuliBranch
-          │
-          ├── Create juliBranch.md
-          │
-          ├── Commit
-          │
-          └── Pull Request
-                    │
-                    ▼
-              Merge into main
-                    │
-                    ▼
-                  main
+同一 Repository：
+
+Branch → Pull Request → main
+
+
+不同 Repository：
+
+Fork Repository → Pull Request → Mother Repository
 ```
 
-若使用 Git 指令直接進行 merge，概念上相當於：
-
-```bash
-git checkout main
-git merge developJuliBranch
-git push origin main
-```
-
-本次實作則使用 GitHub 的 **Pull Request → Merge pull request** 完成合併。
+透過這兩次操作，可以了解 Branch 與 Fork 在 GitHub 協作流程中的差異。
 
 ---
 
-## 6. GitHub Flow 流程說明
-
-本次作業主要採用 **GitHub Flow**。
-
-GitHub Flow 是以 `main` 為主要分支的簡單協作流程。開發新功能或修改內容時，不直接修改 `main`，而是先建立新的 branch，在 branch 中完成修改並 commit，接著建立 Pull Request。確認修改內容後，再將 Pull Request merge 回 `main`。
-
-本次實作流程為：
-
-```text
-Fork Repository
-      ↓
-main
-      ↓
-Create Branch
-      ↓
-developJuliBranch
-      ↓
-Create juliBranch.md
-      ↓
-Commit
-      ↓
-Pull Request
-      ↓
-Merge
-      ↓
-main
-```
-
-與較複雜、包含 `develop`、`release`、`hotfix` 等長期分支的 **Git Flow** 相比，GitHub Flow 的流程較簡單，適合持續開發以及透過 Pull Request 進行協作的專案。
-
----
-
-## 7. 本次操作結果
+## 本次完成項目
 
 | 項目 | 實作結果 |
 |---|---|
-| Fork | ✅ 完成 |
-| Branch | ✅ `developJuliBranch` |
-| Commit | ✅ `Create juliBranch.md` |
-| Pull Request | ✅ Pull Request #1 |
-| Merge | ✅ `developJuliBranch → main` |
-| Workflow | ✅ GitHub Flow |
+| Fork Repository | ✅ 完成 |
+| 建立 Branch | ✅ 完成 |
+| Commit | ✅ 完成 |
+| Branch Pull Request | ✅ 完成 |
+| Branch Merge | ✅ 完成 |
+| Fork 修改 | ✅ 完成 |
+| Fork Pull Request | ✅ 完成 |
+| Merge Fork 至母專案 | ✅ 完成 |
+| GitHub Flow | ✅ 完成 |
 
 ---
 
 ## 結論
 
-透過本次作業，我實際操作了 GitHub 的 Fork、Branch、Commit、Pull Request 與 Merge。
+透過本次作業，我實際操作了 GitHub 的 Branch、Commit、Pull Request、Merge 與 Fork。
 
-先從母專案建立自己的 Fork，再從 `main` 建立 `developJuliBranch`。修改完成後透過 Pull Request 將內容合併回 `main`，完成一次完整的 GitHub Flow 開發流程。
+除了在同一個 Repository 中使用 Branch → Pull Request → Merge 的流程外，也另外練習了將 Repository Fork 至個人帳號，在 Fork 中修改內容，再透過 Pull Request 將修改合併回母專案。
+
+透過實際操作，可以更清楚了解 Branch 與 Fork 的差異，以及 GitHub Flow 在不同 Repository 之間進行協作的方式。
