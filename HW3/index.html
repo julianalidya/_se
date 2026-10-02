@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="UniMate - a simple student life dashboard for tasks, study time, expenses, and notes." />
+  <title>UniMate | Student Life Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><span>U</span> UniMate</div>
+    <nav>
+      <button class="nav active" data-target="dashboard">⌂ <span>Dashboard</span></button>
+      <button class="nav" data-target="tasks">✓ <span>Tasks</span></button>
+      <button class="nav" data-target="focus">◷ <span>Focus</span></button>
+      <button class="nav" data-target="expenses">$ <span>Expenses</span></button>
+      <button class="nav" data-target="notes">✎ <span>Notes</span></button>
+    </nav>
+    <div class="profile">
+      <div class="avatar">JL</div>
+      <div><strong>Juli</strong><small>CSIE Student</small></div>
+    </div>
+  </aside>
+
+  <main>
+    <header>
+      <div>
+        <p class="eyebrow" id="today"></p>
+        <h1>Good <span id="daypart">morning</span>, Juli 👋</h1>
+        <p class="muted">One place to keep your student life under control.</p>
+      </div>
+      <button id="resetBtn" class="ghost">Reset demo data</button>
+    </header>
+
+    <section id="dashboard" class="section">
+      <div class="stats">
+        <article class="stat"><div class="icon">✓</div><div><small>Open Tasks</small><b id="taskCount">0</b></div></article>
+        <article class="stat"><div class="icon">!</div><div><small>Due Soon</small><b id="dueCount">0</b></div></article>
+        <article class="stat"><div class="icon">◷</div><div><small>Study Today</small><b><span id="studyMinutes">0</span> min</b></div></article>
+        <article class="stat"><div class="icon">$</div><div><small>Expenses</small><b>NT$ <span id="expenseTotal">0</span></b></div></article>
+      </div>
+
+      <div class="grid">
+        <article class="card span2">
+          <div class="card-head"><div><p class="eyebrow">GET THINGS DONE</p><h2>Today's tasks</h2></div><button class="small-btn" onclick="showSection('tasks')">View all →</button></div>
+          <div id="taskPreview" class="list"></div>
+        </article>
+
+        <article class="card focus-card">
+          <p class="eyebrow">FOCUS SESSION</p><h2>Pomodoro</h2>
+          <div class="timer" id="timer">25:00</div>
+          <p class="muted center">Stay focused. You've got this.</p>
+          <div class="timer-actions"><button id="timerBtn" class="primary">Start focus</button><button id="timerReset" class="ghost">Reset</button></div>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><div><p class="eyebrow">SPENDING</p><h2>Recent expenses</h2></div></div>
+          <div id="expensePreview" class="list compact"></div>
+        </article>
+
+        <article class="card span2">
+          <p class="eyebrow">QUICK CAPTURE</p><h2>Quick note</h2>
+          <textarea id="quickNote" placeholder="Write something you don't want to forget..."></textarea>
+          <div class="save-row"><span id="noteStatus" class="muted">Saved automatically</span><button id="saveNote" class="primary">Save note</button></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="tasks" class="section hidden">
+      <div class="section-title"><div><p class="eyebrow">TASK MANAGER</p><h2>Assignments & deadlines</h2></div></div>
+      <article class="card">
+        <form id="taskForm" class="form-row">
+          <input id="taskInput" required placeholder="e.g. Finish Software Engineering HW3" />
+          <input id="taskDate" type="date" required />
+          <select id="taskCategory"><option>University</option><option>Personal</option><option>Work</option></select>
+          <button class="primary" type="submit">+ Add task</button>
+        </form>
+        <div id="taskList" class="list"></div>
+      </article>
+    </section>
+
+    <section id="focus" class="section hidden">
+      <div class="section-title"><div><p class="eyebrow">STUDY SMARTER</p><h2>Focus timer</h2></div></div>
+      <article class="card focus-large">
+        <div class="timer huge" id="timerLarge">25:00</div>
+        <p class="muted center">A completed 25-minute session is added to today's study time.</p>
+        <div class="timer-actions"><button id="timerBtnLarge" class="primary">Start focus</button><button id="timerResetLarge" class="ghost">Reset</button></div>
+      </article>
+    </section>
+
+    <section id="expenses" class="section hidden">
+      <div class="section-title"><div><p class="eyebrow">MONEY TRACKER</p><h2>Student expenses</h2></div></div>
+      <article class="card">
+        <form id="expenseForm" class="form-row expense-form">
+          <input id="expenseName" required placeholder="e.g. Lunch" />
+          <input id="expenseAmount" required type="number" min="1" placeholder="Amount (NT$)" />
+          <select id="expenseCategory"><option>Food</option><option>Transport</option><option>Study</option><option>Shopping</option><option>Other</option></select>
+          <button class="primary" type="submit">+ Add expense</button>
+        </form>
+        <div id="expenseList" class="list"></div>
+      </article>
+    </section>
+
+    <section id="notes" class="section hidden">
+      <div class="section-title"><div><p class="eyebrow">BRAIN DUMP</p><h2>Notes</h2></div></div>
+      <article class="card">
+        <textarea id="notesArea" class="big-note" placeholder="Lecture notes, ideas, reminders..."></textarea>
+        <div class="save-row"><span class="muted">Stored locally on this device</span><button id="saveNotesArea" class="primary">Save notes</button></div>
+      </article>
+    </section>
+
+    <footer>Built for Software Engineering HW3 · <strong>111210552 林小蓮</strong></footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
