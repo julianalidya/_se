@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>jcurl · Modern Software Engineering HW1</title>
+<style>
+:root{--bg:#0b1020;--card:#121a30;--text:#edf2ff;--muted:#a9b5d1;--accent:#7dd3fc;--line:#273451}*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,sans-serif;background:linear-gradient(145deg,#080c18,#101a33);color:var(--text);line-height:1.65}main{max-width:980px;margin:auto;padding:64px 24px 90px}.tag{color:var(--accent);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:.82rem}h1{font-size:clamp(2.8rem,8vw,5.8rem);line-height:.95;margin:.25em 0}.lead{font-size:1.2rem;color:var(--muted);max-width:760px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:36px 0}.card,section{background:rgba(18,26,48,.82);border:1px solid var(--line);border-radius:18px;padding:22px}.card b{display:block;margin-bottom:6px}.card span,p{color:var(--muted)}section{margin-top:18px}h2{margin-top:0}pre{overflow:auto;background:#070b15;border:1px solid var(--line);padding:18px;border-radius:12px;color:#d7e7ff}code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}.flow{font-size:1.05rem;word-spacing:.2rem}.footer{text-align:center;color:var(--muted);margin-top:40px;font-size:.9rem}
+</style></head><body><main>
+<div class="tag">Modern Software Engineering · HW1</div><h1>jcurl</h1><p><strong>林小蓮 · 111210552 · 資工四</strong></p><p class="lead">A small curl-like HTTP/1.1 client built from the networking layer upward with Python sockets and TLS—without a high-level HTTP client library.</p>
+<div class="grid"><div class="card"><b>Raw TCP</b><span>Connects using Python's socket module.</span></div><div class="card"><b>HTTPS / TLS</b><span>Wraps TCP with an SSL context and verifies certificates.</span></div><div class="card"><b>HTTP Parsing</b><span>Builds requests and parses status, headers and body.</span></div><div class="card"><b>Streaming Details</b><span>Handles chunked transfer and gzip responses.</span></div></div>
+<section><h2>Request lifecycle</h2><p class="flow">URL → DNS → TCP → TLS (HTTPS) → HTTP request bytes → response stream → parsing → output</p><p>The implementation exposes the layers normally hidden by libraries such as requests or fetch. HTTP/1.1 messages are assembled manually, including CRLF boundaries and standard request headers.</p></section>
+<section><h2>Try it</h2><pre><code># Basic GET
+python jcurl.py https://example.com
+
+# Include response headers
+python jcurl.py -i https://example.com
+
+# Inspect connection and request
+python jcurl.py -v https://example.com
+
+# POST JSON
+python jcurl.py -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"name":"Juli"}' \
+  https://httpbin.org/post</code></pre></section>
+<section><h2>Inside the implementation</h2><pre><code>GET / HTTP/1.1\r\n
+Host: example.com\r\n
+User-Agent: jcurl/1.0\r\n
+Accept: */*\r\n
+Accept-Encoding: gzip\r\n
+Connection: close\r\n
+\r\n</code></pre><p>For HTTPS, the TCP socket is wrapped with TLS before these bytes are sent. The response is collected as bytes, separated into headers and body, then decoded according to response headers.</p></section>
+<section><h2>Chunked transfer decoding</h2><p>When a server uses <code>Transfer-Encoding: chunked</code>, each body segment starts with a hexadecimal length. jcurl parses each size, copies exactly that many bytes, and stops at the zero-size terminating chunk.</p><pre><code>5\r\n
+hello\r\n
+6\r\n
+ world\r\n
+0\r\n
+\r\n</code></pre></section>
+<section><h2>Testing</h2><pre><code>python -m unittest -v</code></pre><p>The included tests cover request construction, normal response parsing, and chunked-body reconstruction without depending on an external server.</p></section>
+<section><h2>Scope</h2><p>jcurl is an educational HTTP/1.1 client rather than a full replacement for curl. Features such as HTTP/2, HTTP/3, redirects, proxying, cookie management, multipart uploads, and authentication helpers are intentionally outside this first version.</p></section>
+<div class="footer">林小蓮 · 111210552 · 資工四<br>Built for Modern Software Engineering · HW1</div></main></body></html>
