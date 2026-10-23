@@ -1,0 +1,68 @@
+Executed on 2026-10-23; Node.js v24.19.0; Linux; Chromium headless.
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> hw7-campus-tasks@1.0.0 test
+> npm run test:unit && npm run test:api && npm run test:e2e
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> hw7-campus-tasks@1.0.0 test:unit
+> node --test tests/unit.test.js
+
+✔ 新增任務會去除空白並設定未完成 (1.174539ms)
+✔ 拒絕空白、錯誤型別及過長名稱 (0.249824ms)
+✔ 完成與取消完成任務 (0.169674ms)
+✔ 刪除任務不會影響其他任務 (0.178687ms)
+✔ 讀取資料不會直接暴露內部物件 (0.198578ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 75.055122
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> hw7-campus-tasks@1.0.0 test:api
+> node --test tests/api.test.js
+
+✔ Web API 完整生命週期：新增、列表、完成、刪除 (35.0193ms)
+✔ API 拒絕無效輸入與 JSON (14.793757ms)
+✔ 不存在的任務與路徑回傳 404 (4.390022ms)
+✔ 首頁提供 HTML (5.632232ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 133.109219
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> hw7-campus-tasks@1.0.0 test:e2e
+> playwright test
+
+[WebServer] (node:105) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+[WebServer] npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+[WebServer] (node:118) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 2 tests using 1 worker
+
+(node:130) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:130) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/e2e.spec.js:2:1 › 使用者新增、完成、重新載入、取消完成並刪除任務 (691ms)
+  ✓  2 tests/e2e.spec.js:31:1 › 空白任務顯示錯誤且不建立資料 (262ms)
+
+  2 passed (2.2s)
+
+To open last HTML report run:
+
+  npx playwright show-report
+
