@@ -1,0 +1,14 @@
+{
+  "name": "unimate-grade-tools-juli",
+  "version": "1.0.0",
+  "description": "Dependency-free weighted grade and target score calculations for students.",
+  "type": "module",
+  "exports": "./index.js",
+  "files": ["index.js"],
+  "license": "UNLICENSED",
+  "keywords": ["grades", "weighted-average", "students", "education"],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  }
+}
